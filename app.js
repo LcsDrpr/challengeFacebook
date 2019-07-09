@@ -1,13 +1,36 @@
+var passport = require('passport');
+var FacebookStrategy = require('passport-facebook').Strategy;
+
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
 var app = express();
+//setup facebook login
+passport.use(new FacebookStrategy({
+  clientID: "571842289544456",
+  clientSecret: "42c91d6ed308bc42c91d6ed308",
+
+
+  callbackURL: 'https://challengefacebookback.herokuapp.com//auth/facebook/callback',
+
+
+  profileFields: ['id', 'first_name', 'last_name', 'email']
+
+},
+function(accessToken, refreshToken, profile, done) {
+
+  return done(null, profile._json);
+
+}));
+
+app.use(passport.initialize());
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
