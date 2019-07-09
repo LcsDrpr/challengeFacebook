@@ -16,7 +16,7 @@ router.get('/auth/facebook/callback',
 
 
   function(req, res) {
-    res.redirect("https://auth.expo.io..." 
+    res.redirect(req.user.redirectUrl
       +"?userId="+req.user.id
       +"&firstName="+req.user.first_name 
       +"&lastName="+req.user.last_name

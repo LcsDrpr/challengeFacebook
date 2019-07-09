@@ -21,12 +21,18 @@ passport.use(new FacebookStrategy({
   callbackURL: 'https://challengefacebookback.herokuapp.com//auth/facebook/callback',
 
 
-  profileFields: ['id', 'first_name', 'last_name', 'email']
+  profileFields: ['id', 'first_name', 'last_name', 'email'],
 
+  passReqToCallBack: true
 },
 function(accessToken, refreshToken, profile, done) {
 
-  return done(null, profile._json);
+
+  var state = JSON.parse(req.query.state);
+
+  var mergeData = {...profile._json, redirectUrl : state.redirectUrl};    
+
+  return done(null, mergeData);
 
 }));
 
