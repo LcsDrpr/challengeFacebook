@@ -25,7 +25,7 @@ passport.use(new FacebookStrategy({
 
   passReqToCallBack: true
 },
-function(accessToken, refreshToken, profile, done) {
+function(req,accessToken, refreshToken, profile, done) {
 
 
   var state = JSON.parse(req.query.state);
