@@ -3,11 +3,13 @@ var router = express.Router();
 var passport = require('passport');
 
 router.get('/auth/facebook',
-  function(req,res,next) {
+
+  function(req,res,next){
     passport.authenticate(
-        'facebook', { scope : 'email', state: JSON.stringify(req.query) }
-    )(req,res,next);
+      'facebook', { scope : 'email',state:JSON.stringify(req.query) })(req,res,next);
   }
+
+
 );
 
 
